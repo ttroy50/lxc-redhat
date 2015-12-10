@@ -461,7 +461,6 @@ else
 	cat <<EOF > $REPO_FILE
 
 [rhel-media]
-#mediaid=1424360759.989976
 metadata_expire=-1
 name=RHEL$release.$minorrelease Media
 baseurl=file:///media/rhel-server-$release.$minorrelease-x86_64-dvd
@@ -469,7 +468,6 @@ gpgcheck=0
 enabled=1
 
 [rhel-media-supp]
-#mediaid=1423043701.634594
 metadata_expire=-1
 name=RHEL$release.$minorrelease Supp Media
 baseurl=file:///media/supp-server-$release.$minorrelease-rhel-$release-x86_64-dvd
@@ -477,6 +475,23 @@ gpgcheck=0
 enabled=1
 
 EOF
+
+        cat <<EOF > $rootfs_path/etc/yum.repos.d/rhel-media.repo
+[rhel-media]
+metadata_expire=-1
+name=RHEL$release.$minorrelease Media
+baseurl=file:///media/rhel-server-$release.$minorrelease-x86_64-dvd
+gpgcheck=0
+enabled=1
+
+[rhel-media-supp]
+metadata_expire=-1
+name=RHEL$release.$minorrelease Supp Media
+baseurl=file:///media/supp-server-$release.$minorrelease-rhel-$release-x86_64-dvd
+gpgcheck=0
+enabled=1
+EOF
+
     fi
 
     # create minimal device nodes, needed for "yum install" and "yum update" process
@@ -739,7 +754,7 @@ EOF
     return 0
 }
 
-options=$(getopt -o a:hp:n:cRM: -l help,path:,rootfs:,name:,clean,release:,minorrelease:repo:,arch:,fqdn: -- "$@")
+options=$(getopt -o a:hp:n:cR:M: -l help,path:,rootfs:,name:,clean,release:,minorrelease:,repo:,arch:,fqdn:, -- "$@")
 if [ $? -ne 0 ]; then
     usage $(basename $0)
     exit 1
