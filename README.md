@@ -1,9 +1,9 @@
 # lxc-redhat: LXC template for Redhat
 
-This template can create a RedHat RHEL container on Ubuntu.
+This template can create a RedHat Enterprise Linux container on Ubuntu.
 
-It is based off the centos lxc container template in Ubuntu 14.04 
-with some additional changes copied from the oracle and fedora templates.
+It is based off the CentOS lxc container template in Ubuntu 14.04 
+with some additional changes copied from the Oracle and Fedora templates to support RHEL7
 
 It should support RHEL 5, 6 and 7 but has only been tested on RHEL7.1 for now.
 
